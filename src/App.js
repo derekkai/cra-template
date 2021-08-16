@@ -5,7 +5,6 @@ import Home from 'components/Home/Home'
 import Login from 'components/Login/Login'
 import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
-import './App.css'
 import { setFlag } from './reducers/global'
 
 function App() {

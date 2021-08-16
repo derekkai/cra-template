@@ -5,6 +5,7 @@ import './index.css'
 import configureStore from './store/configureStore'
 import App from './App'
 import './i18n'
+import 'normalize.css'
 import reportWebVitals from './reportWebVitals'
 
 const store = configureStore()
