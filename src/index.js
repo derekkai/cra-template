@@ -1,18 +1,28 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import StyleContext from 'isomorphic-style-loader/StyleContext'
 import ReactDOM from 'react-dom'
-import './index.css'
+import ThemeProvider from './provider/ThemeProvider'
 import { store } from './store/configureStore'
 import App from './App'
 import './i18n'
-import 'normalize.css'
+
 import reportWebVitals from './reportWebVitals'
+
+const insertCss = (...styles) => {
+  const removeCss = styles.map((style) => style._insertCss())
+  return () => removeCss.forEach((dispose) => dispose())
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <StyleContext.Provider value={{ insertCss }}>
+      <Provider store={store}>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </StyleContext.Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 )
