@@ -1,6 +1,12 @@
 const {
-	addBeforeLoaders, removeLoaders, getLoaders, loaderByName
+	addBeforeLoaders,
+	removeLoaders,
+	getLoaders,
+	loaderByName,
+	getPlugin,
+	pluginByName,
 } = require('@craco/craco')
+const git = require('git-rev-sync')
 
 const newWebpackLoader = {
 	loader: require.resolve("isomorphic-style-loader")
@@ -24,6 +30,14 @@ module.exports = {
 				console.log('loader not found.')
 			}
 
+			const { isFound, match } = getPlugin(webpackConfig, pluginByName("HtmlWebpackPlugin"))
+			if (isFound) {
+				match.options.gitInfo = {
+					tag: git.tag(),
+					commitDate: git.date(),
+					buildDate: new Date(),
+				}
+			}
 			return webpackConfig;
 		}
 	}

@@ -1,3 +1,8 @@
+/**
+ * overwrite the useStyles in isomorphic-style-loader because the following issue
+ * https://github.com/kriasoft/isomorphic-style-loader/issues/177
+ */
+
 import { useContext, useEffect } from 'react'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
 
