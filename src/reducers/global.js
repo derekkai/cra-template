@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAction } from '@reduxjs/toolkit'
+
+export const getData = createAction('global/getData')
 
 export const slice = createSlice({
   name: 'global',
@@ -18,8 +20,11 @@ export const slice = createSlice({
     setFlag2: (state, { payload }) => {
       state.flag2 = !state.flag2
     },
+    setUser: (state, { payload }) => {
+      console.log(payload)
+    },
   },
 })
 
-export const { setFlag, setFlag2, setTheme } = slice.actions
+export const { setFlag, setFlag2, setTheme, setUser } = slice.actions
 export default slice.reducer

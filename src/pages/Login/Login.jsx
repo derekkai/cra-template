@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import useStyles from 'hooks/useStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Login.module.scss'
-import { setFlag, setFlag2, setTheme } from '../../reducers/global'
+import { setFlag, setFlag2, setTheme, getData } from '../../reducers/global'
 
 const Login = () => {
   useStyles(styles)
@@ -14,6 +14,7 @@ const Login = () => {
     dispatch(setFlag2())
     dispatch(setFlag())
     dispatch(setTheme())
+    dispatch(getData())
   }
 
   return (
