@@ -8,6 +8,7 @@ export const slice = createSlice({
     theme: true,
     flag: false,
     flag2: false,
+    message: '',
   },
   reducers: {
     setTheme: (state, { payload }) => {
@@ -23,8 +24,12 @@ export const slice = createSlice({
     setUser: (state, { payload }) => {
       console.log(payload)
     },
+    updateMessage: (state, { payload }) => {
+      console.log(payload)
+      state.message = payload
+    },
   },
 })
 
-export const { setFlag, setFlag2, setTheme, setUser } = slice.actions
+export const { setFlag, setFlag2, setTheme, setUser, updateMessage } = slice.actions
 export default slice.reducer

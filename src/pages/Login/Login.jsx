@@ -16,11 +16,18 @@ const Login = () => {
     dispatch(setTheme())
     dispatch(getData())
   }
-
+  const handleClick2 = () => {
+    dispatch({ type: 'initWebSocket' })
+  }
+  const handleClick3 = () => {
+    dispatch({ type: 'sendMessage1' })
+  }
   return (
     <div className={styles.container}>
       This is Login page.
       <button onClick={handleClick}>Test</button>
+      <button onClick={handleClick2}>Test2</button>
+      <button onClick={handleClick3}>Test3</button>
     </div>
   )
 }
