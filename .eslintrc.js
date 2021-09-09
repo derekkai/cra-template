@@ -23,6 +23,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'import/no-cycle': 'off',
     semi: ['error', 'never'],
     'react-hooks/rules-of-hooks': 'error',
     'no-debugger': 0,

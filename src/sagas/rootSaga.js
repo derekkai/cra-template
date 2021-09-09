@@ -21,10 +21,8 @@ function* handleGetData() {
   }
 }
 
-function* watchers() {
+export default function* watchers() {
   yield takeEvery(getData.type, handleGetData)
   yield take('initWebSocket')
   yield fork(createSagaWebSocket)
 }
-
-export default watchers
