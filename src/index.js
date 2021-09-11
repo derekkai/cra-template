@@ -1,28 +1,17 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import StyleContext from 'isomorphic-style-loader/StyleContext'
 import ReactDOM from 'react-dom'
-import ThemeProvider from './provider/ThemeProvider'
-import { store } from './store/configureStore'
 import App from './App'
+import Route from './Routes'
+import { store } from './store/configureStore'
 import './i18n'
-
 import reportWebVitals from './reportWebVitals'
-
-const insertCss = (...styles) => {
-  const removeCss = styles.map((style) => style._insertCss())
-  return () => removeCss.forEach((dispose) => dispose())
-}
+import insertCss from './utils/insertCss'
 
 ReactDOM.render(
   <React.StrictMode>
-    <StyleContext.Provider value={{ insertCss }}>
-      <Provider store={store}>
-        <ThemeProvider>
-          <App />
-        </ThemeProvider>
-      </Provider>
-    </StyleContext.Provider>
+    <App insertCss={insertCss} store={store}>
+      <Route />
+    </App>
   </React.StrictMode>,
   document.getElementById('root'),
 )

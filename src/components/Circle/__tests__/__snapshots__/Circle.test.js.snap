@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly 1`] = `
+<svg
+  className="root"
+  viewBox="0 0 200 200"
+>
+  <path
+    d=" M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 "
+    style={
+      Object {
+        "strokeDashoffset": 240.21,
+      }
+    }
+  />
+</svg>
+`;

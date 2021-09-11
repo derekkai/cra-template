@@ -1,32 +1,23 @@
-import { lazy, Suspense } from 'react'
-import useStyles from 'hooks/useStyles'
-import history from 'utils/history'
-import { useInjectSaga } from 'redux-injectors'
-import { Route, Switch } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
-import defaultTheme from 'theme/_default.scss'
-import resetStyle from 'normalize.css'
-import rootSaga from './sagas/rootSaga'
-import globalStyles from './index.css'
+import PropTypes from 'prop-types'
+import React, { Children } from 'react'
+import StyleContext from 'isomorphic-style-loader/StyleContext'
+import { Provider } from 'react-redux'
+import ThemeProvider from './theme/ThemeProvider'
 
-const Home = lazy(() => import('pages/Home/Home'))
-const Login = lazy(() => import('pages/Login/Login'))
-
-function App() {
-  useStyles(globalStyles)
-  useStyles(defaultTheme)
-  useStyles(resetStyle)
-  useInjectSaga({ key: 'root', saga: rootSaga })
+const App = ({ children, insertCss, store }) => {
   return (
-    <ConnectedRouter history={history}>
-      <Suspense fallback={<div />}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </Suspense>
-    </ConnectedRouter>
+    <StyleContext.Provider value={{ insertCss }}>
+      <Provider store={store}>
+        <ThemeProvider>{Children.only(children)}</ThemeProvider>
+      </Provider>
+    </StyleContext.Provider>
   )
+}
+
+App.propTypes = {
+  store: PropTypes.object,
+  children: PropTypes.element.isRequired,
+  insertCss: PropTypes.func.isRequired,
 }
 
 export default App

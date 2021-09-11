@@ -1,4 +1,4 @@
-class EWebSocket {
+class Communication {
   #ws = null
 
   #url = ''
@@ -47,4 +47,4 @@ class EWebSocket {
   }
 }
 
-export default EWebSocket
+export default Communication

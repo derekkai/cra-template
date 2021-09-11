@@ -1,3 +1,6 @@
+/* noinspection CssInvalidAtRule */
+@import-normalize;
+
 button {
   border: 0;
   cursor: pointer;

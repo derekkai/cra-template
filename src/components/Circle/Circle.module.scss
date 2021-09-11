@@ -1,0 +1,18 @@
+.root {
+  path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: navy;
+    stroke-width: 5px;
+    fill: none;
+    stroke-dasharray: 471;
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    cursor: pointer;
+    path {
+      stroke-dashoffset: 0;
+    }
+  }
+}

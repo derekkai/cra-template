@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next'
 import useStyles from 'hooks/useStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import useInjections, { actions } from './slice'
-import styles from './Login.module.scss'
+import styles from './LoginPage.module.scss'
 import { setFlag, setFlag2, setTheme, getData } from '../../reducers/global'
 
-const Login = () => {
+const LoginPage = () => {
   useInjections()
   useStyles(styles)
   const { flag, flag2 } = useSelector((state) => state.global)
@@ -38,4 +38,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginPage
