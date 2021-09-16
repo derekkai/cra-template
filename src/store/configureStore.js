@@ -17,6 +17,7 @@ const middlewares = [logger, routerMiddleware(history), sagaMiddleware]
 export const store = configureStore({
   reducer: createReducer(),
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), ...middlewares],
+  devTools: process.env.NODE_ENV !== 'production' || process.env.PUBLIC_URL.length > 0,
   enhancers: [
     createInjectorsEnhancer({
       createReducer,

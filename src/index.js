@@ -1,11 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import FastClick from 'fastclick'
 import App from './App'
 import Route from './Routes'
 import { store } from './store/configureStore'
 import './i18n'
 import reportWebVitals from './reportWebVitals'
 import insertCss from './utils/insertCss'
+
+FastClick.attach(document.body)
 
 ReactDOM.render(
   <React.StrictMode>

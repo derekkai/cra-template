@@ -1,7 +1,7 @@
 import { takeEvery, call, put, take, fork } from 'redux-saga/effects'
 import { getData, setUser } from 'reducers/global'
 import axios from 'axios'
-import createCommunicationSaga from './communicationSaga'
+import createWebSocketSaga from './WebSocketSaga'
 
 function requestGetUser() {
   return axios.request({
@@ -24,5 +24,5 @@ function* handleGetData() {
 export default function* watchers() {
   yield takeEvery(getData.type, handleGetData)
   yield take('initWebSocket')
-  yield fork(createCommunicationSaga)
+  yield fork(createWebSocketSaga)
 }

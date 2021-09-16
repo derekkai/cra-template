@@ -5,6 +5,7 @@ node_modules/
 
 # Compiled output
 build
+storybook-static
 
 # Runtime data
 database.sqlite

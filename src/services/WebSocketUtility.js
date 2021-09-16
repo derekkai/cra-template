@@ -1,4 +1,4 @@
-class Communication {
+class WebSocketUtility {
   #ws = null
 
   #url = ''
@@ -13,7 +13,7 @@ class Communication {
       this.#ws.onopen = () => {
         resolve()
       }
-    }).then(() => this)
+    })
   }
 
   #sendMessage1 = () => {
@@ -24,7 +24,7 @@ class Communication {
     this.#ws.send('sendMessage2')
   }
 
-  actions = () => {
+  getActions = () => {
     return {
       sendMessage1: this.#sendMessage1,
       sendMessage2: this.#sendMessage2,
@@ -47,4 +47,4 @@ class Communication {
   }
 }
 
-export default Communication
+export default WebSocketUtility

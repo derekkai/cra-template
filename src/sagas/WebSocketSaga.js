@@ -1,7 +1,7 @@
 import { eventChannel } from 'redux-saga'
 import { call, take, takeEvery, put } from 'redux-saga/effects'
 import { updateMessage } from 'reducers/global'
-import Communication from '../services/communication'
+import WebSocketUtility from '../services/WebSocketUtility'
 
 const testUrl =
   'wss://demo.piesocket.com/v3/channel_1?api_key=oCdCMcMPQpbvNjUIzqtvF1d2X2okWpDQj4AwARJuAgtjhzKxVEjQU6IdCjwm&notify_self'
@@ -19,11 +19,11 @@ function createEventChannel(ws) {
   }
 }
 
-export default function* createCommunicationSaga() {
-  const ws = new Communication(testUrl)
+export default function* createWebSocketSaga() {
+  const ws = new WebSocketUtility(testUrl)
   yield ws.connect()
 
-  const actions = ws.actions()
+  const actions = ws.getActions()
   const keys = Object.keys(actions)
   console.log(actions)
   for (let i = 0; i < keys.length; i += 1) {
