@@ -1,7 +1,7 @@
 import { takeEvery, call, put, take, fork } from 'redux-saga/effects'
 import { getData, setUser } from 'reducers/global'
 import axios from 'axios'
-import createWebSocketSaga from './WebSocketSaga'
+import createWebSocketSaga from './webSocketSaga'
 
 function requestGetUser() {
   return axios.request({

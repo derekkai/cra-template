@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import useStyles from 'hooks/useStyles'
+import { sendMessage1 } from 'reducers/webSocket'
 import { useDispatch, useSelector } from 'react-redux'
 import useInjections, { actions } from './slice'
 import styles from './LoginPage.module.scss'
@@ -22,7 +23,7 @@ const LoginPage = () => {
     dispatch({ type: 'initWebSocket' })
   }
   const handleClick3 = () => {
-    dispatch({ type: 'sendMessage1' })
+    dispatch(sendMessage1('message'))
   }
   const handleLogin = () => {
     dispatch(actions.setLogin())
