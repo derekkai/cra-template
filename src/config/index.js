@@ -1,3 +1,3 @@
 module.exports = {
-  webSocketConnectTimeout: 5000,
+  webSocketConnectTimeout: 10000,
 }

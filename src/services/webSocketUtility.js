@@ -8,6 +8,8 @@ class WebSocketUtility {
 
   #dispatch = null
 
+  #emit = null
+
   constructor(url, dispatch) {
     this.#url = url
     this.#dispatch = dispatch
@@ -17,21 +19,43 @@ class WebSocketUtility {
     this.#dispatch?.(updateReadyState(this.#ws.readyState))
   }
 
-  connect = () => {
+  connect = (autoRetry = false) => {
     console.warn('ws connecting')
     this.#ws = new WebSocket(this.#url)
     this.#updateReadyState()
+    this.#onError()
     return new Promise((resolve) => {
       const timer = setTimeout(() => {
-        this.#reconnect()
+        resolve(false)
+        if (autoRetry) this.#reconnect()
       }, webSocketConnectTimeout)
 
       this.#ws.onopen = () => {
         this.#updateReadyState()
         clearTimeout(timer)
-        resolve()
+        this.#onClose()
+        resolve(true)
       }
     })
+  }
+
+  disconnect = () => {
+    if (this.#ws && this.#ws.readyState === WebSocket.OPEN) {
+      this.#updateReadyState()
+      this.#ws.close()
+      return new Promise((resolve) => {
+        this.#ws.onclose = () => {
+          resolve('on close')
+        }
+      })
+    }
+  }
+
+  #reconnect = async () => {
+    console.warn('ws reconnecting')
+    await this.disconnect()
+    await this.connect(true)
+    await this.createMessageEmitter()
   }
 
   #sendMessage1 = (data) => {
@@ -50,27 +74,23 @@ class WebSocketUtility {
     }
   }
 
-  onMessage = (emit) => {
-    this.#ws.onmessage = (message) => emit(message)
+  createMessageEmitter = (emit) => {
+    if (!this.#emit) this.#emit = emit
+    this.#ws.onmessage = (message) => this.#emit(message)
   }
 
-  disconnect = () => {
-    if (this.#ws && this.#ws.readyState === WebSocket.OPEN) {
-      this.#updateReadyState()
-      this.#ws.close()
-      return new Promise((resolve) => {
-        this.#ws.onclose = (e) => {
-          this.#updateReadyState()
-          resolve(e)
-        }
-      })
+  #onError = () => {
+    this.#ws.onerror = (e) => {
+      console.error(e)
     }
   }
 
-  #reconnect = async () => {
-    console.warn('ws reconnecting')
-    await this.disconnect()
-    await this.connect()
+  #onClose = () => {
+    this.#ws.onclose = (e) => {
+      this.#updateReadyState()
+      console.warn(e)
+      this.#reconnect()
+    }
   }
 }
 
